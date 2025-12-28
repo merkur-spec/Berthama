@@ -1,6 +1,6 @@
 /* === General Styles === */
 html, body {
-    height: 100%; /* ensure body and html fill viewport */
+    height: 100%;
     margin: 0;
 }
 
@@ -27,7 +27,7 @@ body::before {
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    opacity: .25;
+    opacity: 0.25;
     pointer-events: none;
     z-index: -1;
     filter: brightness(0.75);
@@ -54,18 +54,17 @@ header {
     z-index: 1;
 }
 
-header .slogan {
-    font-size: 1rem;
-    letter-spacing: 2px;
-    margin-top: 5px;
-    color: #C0C0C0;
-}
-
 header h1 {
     margin: 0;
     font-size: 3em;
     letter-spacing: 5px;
     cursor: pointer;
+}
+
+header .slogan {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-top: 5px;
 }
 
 /* === Navigation === */
@@ -108,11 +107,13 @@ main {
     margin: 0 auto;
 }
 
-/* Default padding for normal pages */
+/* Normal pages container padding */
 #normal-pages {
+    position: relative;
     padding: 50px 20px;
 }
 
+/* Headings and paragraphs */
 main h2 {
     font-size: 2em;
     margin-bottom: 20px;
@@ -124,7 +125,7 @@ main p {
     line-height: 1.6em;
 }
 
-/* === Releases === */
+/* Releases */
 article {
     background-color: rgba(17, 17, 17, 0.8);
     padding: 20px;
@@ -137,7 +138,7 @@ article h3 {
     color: #00ffff;
 }
 
-/* === Footer === */
+/* Footer */
 footer {
     background-color: rgba(17, 17, 17, 0.9);
     text-align: center;
@@ -147,97 +148,55 @@ footer {
     color: #aaa;
 }
 
-/* === Page flipping effect === */
+/* === Sections fade === */
 section {
-    display: none;
     opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
     transition: opacity 0.5s ease;
 }
 
 section.active {
-    display: block;
     opacity: 1;
+    pointer-events: auto;
+    position: relative;
 }
 
-/* === Landing Page === */
+/* === Landing page === */
 #landing {
-    display: none;
-    flex: 1; /* fill remaining space */
-    padding: 0; /* remove main padding */
-}
-
-#landing.active {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: flex-start; /* content at top */
+    justify-content: flex-start;
+    padding: 0;
 }
 
 /* === Responsive adjustments === */
 @media (max-width: 768px) {
-    header {
-        font-size: 1.5rem;
-        padding: 20px 10px;
-    }
+    header { font-size: 1.5rem; padding: 20px 10px; }
+    header h1 { font-size: 2.2em; }
+    header p { font-size: 0.9rem; }
 
-    header h1 {
-        font-size: 2.2em;
-    }
+    nav ul { flex-direction: row; gap: 10px; }
+    nav li { margin: 5px 0; }
 
-    header p {
-        font-size: 0.9rem;
-    }
+    #normal-pages { padding: 30px 15px; }
+    article { padding: 15px; border-left-width: 3px; }
 
-    nav ul {
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    nav li {
-        margin: 5px 0;
-    }
-
-    #normal-pages {
-        padding: 30px 15px;
-    }
-
-    article {
-        padding: 15px;
-        border-left-width: 3px;
-    }
-
-    /* Force footer to bottom */
-    body {
-        flex-direction: column;
-    }
-
-    footer {
-        margin-top: auto;
-    }
+    body { flex-direction: column; }
+    footer { margin-top: auto; }
 }
 
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8em;
-    }
+    header h1 { font-size: 1.8em; }
+    header p { font-size: 0.8rem; }
+    nav a { font-size: 1em; }
 
-    header p {
-        font-size: 0.8rem;
-    }
+    main h2 { font-size: 1.5em; }
+    main p { font-size: 1em; }
 
-    nav a {
-        font-size: 1em;
-    }
-
-    main h2 {
-        font-size: 1.5em;
-    }
-
-    main p {
-        font-size: 1em;
-    }
-
-    header .slogan {
-        font-size: 0.65rem;
-        letter-spacing: 1px;
-    }
+    header .slogan { font-size: 0.65rem; letter-spacing: 1px; }
 }
+
