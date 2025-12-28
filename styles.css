@@ -1,0 +1,213 @@
+/* === General Styles === */
+body {
+    margin: 0;
+    background-color: #0a0a0a;
+    color: #C0C0C0; /* silver text */
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* === Subtle Techno Core Background === */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1200px;
+    height: 1200px;
+    background-image: url("https://i.imgur.com/UFsGnNd.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: -1;
+    filter: brightness(0.75);
+    animation: subtlePulse 40s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.02); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* === Header === */
+header {
+    background-color: rgba(10, 10, 10, 0.4);
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 2px solid #C0C0C0;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    color: #C0C0C0;
+    text-shadow: 0 0 8px #00ffff, 0 0 12px #C0C0C0;
+    position: relative;
+    z-index: 1;
+}
+
+header .slogan {
+    font-size: 1rem;      /* default for desktop */
+    letter-spacing: 2px;
+    margin-top: 5px;
+    color: #C0C0C0;
+}
+
+
+header h1 {
+    margin: 0;
+    font-size: 3em;
+    letter-spacing: 5px;
+}
+
+header p {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+/* === Navigation === */
+nav {
+    text-align: center;
+    background-color: rgba(17, 17, 17, 0.9);
+    padding: 15px 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav li {
+    margin: 5px 15px;
+}
+
+nav a {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #C0C0C0;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #00ffff;
+}
+
+/* === Main Sections === */
+main {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+main h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #00ffff;
+}
+
+main p {
+    font-size: 1.1em;
+    line-height: 1.6em;
+}
+
+/* === Releases === */
+article {
+    background-color: rgba(17, 17, 17, 0.8);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #C0C0C0;
+}
+
+article h3 {
+    margin-top: 0;
+    color: #00ffff;
+}
+
+/* === Footer === */
+footer {
+    background-color: rgba(17, 17, 17, 0.9);
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid #C0C0C0;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+/* === Page flipping effect === */
+section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+section.active {
+    display: block;
+    opacity: 1;
+}
+
+/* === Responsive adjustments for phones and tablets === */
+@media (max-width: 768px) {
+    header {
+        font-size: 1.5rem;
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    nav li {
+        margin: 5px 0;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+
+    article {
+        padding: 15px;
+        border-left-width: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    header p {
+        font-size: 0.8rem;
+    }
+
+    nav a {
+        font-size: 1em;
+    }
+
+    main h2 {
+        font-size: 1.5em;
+    }
+
+    main p {
+        font-size: 1em;
+    }
+    header .slogan {
+        font-size: 0.65rem;  /* adjust smaller for phones */
+        letter-spacing: 1px;
+    }
+
+}
