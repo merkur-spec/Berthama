@@ -1,8 +1,11 @@
 /* === General Styles === */
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;   /* ensures body takes full viewport height */
     margin: 0;
     background-color: #0a0a0a;
-    color: #C0C0C0; /* silver text */
+    color: #C0C0C0;
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -100,6 +103,7 @@ nav a:hover {
 
 /* === Main Sections === */
 main {
+    flex: 1;  /* takes all space between header and footer */
     padding: 50px 20px;
     max-width: 900px;
     margin: 0 auto;
@@ -207,6 +211,11 @@ section.active {
     }
     header .slogan {
         font-size: 0.65rem;  /* adjust smaller for phones */
+        letter-spacing: 1px;
+    }
+
+}
+
         letter-spacing: 1px;
     }
 
