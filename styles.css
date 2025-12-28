@@ -1,15 +1,18 @@
 /* === General Styles === */
+html, body {
+    height: 100%; /* ensure body and html fill viewport */
+    margin: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
     background-color: #0a0a0a;
     color: #C0C0C0;
     font-family: 'Orbitron', sans-serif;
-    align-items: stretch; /* ensures children stretch full width */
+    align-items: stretch;
 }
-
 
 /* === Subtle Techno Core Background === */
 body::before {
@@ -24,7 +27,7 @@ body::before {
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    opacity: 0.25;
+    opacity: .25;
     pointer-events: none;
     z-index: -1;
     filter: brightness(0.75);
@@ -39,7 +42,6 @@ body::before {
 
 /* === Header === */
 header {
-    background-color: rgba(10, 10, 10, 0.4);
     padding: 30px 20px;
     text-align: center;
     border-bottom: 2px solid #C0C0C0;
@@ -53,23 +55,17 @@ header {
 }
 
 header .slogan {
-    font-size: 1rem;      /* default for desktop */
+    font-size: 1rem;
     letter-spacing: 2px;
     margin-top: 5px;
     color: #C0C0C0;
 }
 
-
 header h1 {
     margin: 0;
     font-size: 3em;
     letter-spacing: 5px;
-}
-
-header p {
-    font-size: 1rem;
-    letter-spacing: 2px;
-    margin-top: 5px;
+    cursor: pointer;
 }
 
 /* === Navigation === */
@@ -105,12 +101,16 @@ nav a:hover {
 
 /* === Main Sections === */
 main {
-    flex: 1;             /* grow to fill space */
-    padding: 50px 20px;
+    flex: 1;
     max-width: 900px;
-    width: 100%;         /* take full width allowed by max-width */
-    text-align: left;    /* keep text on the left */
-    margin: 0 auto;      /* center container, but text stays left */
+    width: 100%;
+    text-align: left;
+    margin: 0 auto;
+}
+
+/* Default padding for normal pages */
+#normal-pages {
+    padding: 50px 20px;
 }
 
 main h2 {
@@ -159,7 +159,20 @@ section.active {
     opacity: 1;
 }
 
-/* === Responsive adjustments for phones and tablets === */
+/* === Landing Page === */
+#landing {
+    display: none;
+    flex: 1; /* fill remaining space */
+    padding: 0; /* remove main padding */
+}
+
+#landing.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* content at top */
+}
+
+/* === Responsive adjustments === */
 @media (max-width: 768px) {
     header {
         font-size: 1.5rem;
@@ -183,13 +196,22 @@ section.active {
         margin: 5px 0;
     }
 
-    main {
+    #normal-pages {
         padding: 30px 15px;
     }
 
     article {
         padding: 15px;
         border-left-width: 3px;
+    }
+
+    /* Force footer to bottom */
+    body {
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: auto;
     }
 }
 
@@ -213,9 +235,9 @@ section.active {
     main p {
         font-size: 1em;
     }
+
     header .slogan {
-        font-size: 0.65rem;  /* adjust smaller for phones */
+        font-size: 0.65rem;
         letter-spacing: 1px;
     }
-
 }
