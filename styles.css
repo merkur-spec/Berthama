@@ -2,12 +2,14 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;   /* ensures body takes full viewport height */
+    min-height: 100vh;
     margin: 0;
     background-color: #0a0a0a;
     color: #C0C0C0;
     font-family: 'Orbitron', sans-serif;
+    align-items: stretch; /* ensures children stretch full width */
 }
+
 
 /* === Subtle Techno Core Background === */
 body::before {
@@ -103,10 +105,12 @@ nav a:hover {
 
 /* === Main Sections === */
 main {
-    flex: 1;  /* takes all space between header and footer */
+    flex: 1;             /* grow to fill space */
     padding: 50px 20px;
     max-width: 900px;
-    margin: 0 auto;
+    width: 100%;         /* take full width allowed by max-width */
+    text-align: left;    /* keep text on the left */
+    margin: 0 auto;      /* center container, but text stays left */
 }
 
 main h2 {
@@ -211,11 +215,6 @@ section.active {
     }
     header .slogan {
         font-size: 0.65rem;  /* adjust smaller for phones */
-        letter-spacing: 1px;
-    }
-
-}
-
         letter-spacing: 1px;
     }
 
