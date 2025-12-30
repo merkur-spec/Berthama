@@ -14,6 +14,25 @@ body {
     align-items: stretch;
 }
 
+/* === Shared dark overlay value === */
+:root {
+    --header-overlay: rgba(0, 0, 0, 0.35);
+}
+
+.top-shell {
+    position: relative;
+    isolation: isolate;
+}
+
+.top-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--header-overlay);
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* === Subtle Techno Core Background === */
 body::before {
     content: "";
@@ -27,7 +46,7 @@ body::before {
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    opacity: 0.42;
+    opacity: 0.75;
     pointer-events: none;
     z-index: -1;
     filter: brightness(0.75);
@@ -44,15 +63,17 @@ body::before {
 header {
     padding: 30px 20px;
     text-align: center;
-    border-bottom: 2px solid #C0C0C0;
     font-weight: 700;
     font-size: 2rem;
     letter-spacing: 5px;
     color: #C0C0C0;
     text-shadow: 0 0 8px #00ffff, 0 0 12px #C0C0C0;
     position: relative;
+    isolation: isolate;
     z-index: 1;
+    margin-top: -35px;
 }
+
 
 header h1 {
     margin: 0;
@@ -60,6 +81,7 @@ header h1 {
     letter-spacing: 5px;
     cursor: pointer;
 }
+
 
 header .slogan {
     font-size: 1rem;
@@ -70,9 +92,14 @@ header .slogan {
 /* === Navigation === */
 nav {
     text-align: center;
-    background-color: rgba(17, 17, 17, 0.9);
-    padding: 15px 10px;
+    padding: 2px 10px;
+    margin-top: -40px;
+    border-top: 2px solid #C0C0C0;
+    position: relative;
+    isolation: isolate;
+    z-index: 2;
 }
+
 
 nav ul {
     list-style: none;
@@ -107,13 +134,11 @@ main {
     margin: 0 auto;
 }
 
-/* Normal pages container padding */
 #normal-pages {
     position: relative;
     padding: 50px 20px;
 }
 
-/* Headings and paragraphs */
 main h2 {
     font-size: 2em;
     margin-bottom: 20px;
@@ -153,7 +178,8 @@ section {
     opacity: 0;
     pointer-events: none;
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     transition: opacity 0.5s ease;
 }
@@ -175,17 +201,30 @@ section.active {
 
 /* === Responsive adjustments === */
 @media (max-width: 768px) {
-    header { font-size: 1.5rem; padding: 20px 10px; }
+    header {
+        font-size: 1.5rem;
+        padding: 20px 10px;
+        margin-top: 0;
+    }
+
+    body::before {
+        width: 850px;   /* smaller than 1200px */
+        height: 850px;  /* smaller than 1200px */
+    }
+
     header h1 { font-size: 2.2em; }
     header p { font-size: 0.9rem; }
 
-    nav ul { flex-direction: row; gap: 10px; }
+    nav {
+        margin-top: 0;
+    }
+
+    nav ul { gap: 10px; }
     nav li { margin: 5px 0; }
 
     #normal-pages { padding: 30px 15px; }
     article { padding: 15px; border-left-width: 3px; }
 
-    body { flex-direction: column; }
     footer { margin-top: auto; }
 }
 
@@ -194,9 +233,20 @@ section.active {
     header p { font-size: 0.8rem; }
     nav a { font-size: 1em; }
 
+    body::before {
+        width: 800px;   /* even smaller on very small screens */
+        height: 800px;
+    }
+
+    nav {
+        margin-top: -15px;
+    }
+
     main h2 { font-size: 1.5em; }
     main p { font-size: 1em; }
 
-    header .slogan { font-size: 0.65rem; letter-spacing: 1px; }
+    header .slogan {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
 }
-
