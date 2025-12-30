@@ -52,7 +52,7 @@ async function showPage(pageId) {
     fadeIn(next);
 
     // Darken the page overlay slightly
-    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0.35)';
 }
 
 // Show landing page
