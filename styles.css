@@ -16,7 +16,7 @@ body {
 
 /* === Shared dark overlay value === */
 :root {
-    --header-overlay: rgba(0, 0, 0, 0.35);
+    --header-overlay: rgba(0, 0, 0, 0.5);
 }
 
 .top-shell {
@@ -34,19 +34,20 @@ body {
 }
 
 /* === Subtle Techno Core Background === */
+/* === Desktop background (default) === */
 body::before {
     content: "";
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 1200px;
-    height: 1200px;
-    background-image: url("https://i.imgur.com/UFsGnNd.png");
-    background-size: contain;
+    width: 90%;
+    height: 100%;
+    background-image: url("berthama.png");
+    background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
-    opacity: 0.75;
+    opacity: 1;
     pointer-events: none;
     z-index: -1;
     filter: brightness(0.75);
@@ -64,7 +65,7 @@ header {
     padding: 30px 20px;
     text-align: center;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.3rem;
     letter-spacing: 5px;
     color: #C0C0C0;
     text-shadow: 0 0 8px #00ffff, 0 0 12px #C0C0C0;
@@ -74,14 +75,12 @@ header {
     margin-top: -35px;
 }
 
-
 header h1 {
     margin: 0;
     font-size: 3em;
     letter-spacing: 5px;
     cursor: pointer;
 }
-
 
 header .slogan {
     font-size: 1rem;
@@ -99,7 +98,6 @@ nav {
     isolation: isolate;
     z-index: 2;
 }
-
 
 nav ul {
     list-style: none;
@@ -120,6 +118,7 @@ nav a {
     font-size: 1.1em;
     color: #C0C0C0;
     transition: color 0.3s;
+    text-decoration: under;
 }
 
 nav a:hover {
@@ -129,18 +128,26 @@ nav a:hover {
 /* === Main Sections === */
 main {
     flex: 1;
-    max-width: 900px;
     width: 100%;
     text-align: left;
     margin: 0 auto;
+    position: relative;
+}
+
+#content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
 
 #page-overlay {
-    position: fixed;
-    inset: 0; /* top:0; left:0; right:0; bottom:0; */
-    background-color: rgba(0, 0, 0, 0); /* start transparent */
-    pointer-events: none; /* so it doesn’t block clicks */
-    z-index: 1; /* behind nav but above background */
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0);
+    pointer-events: none;
+    z-index: 1;
     transition: background-color 0.5s ease;
 }
 
@@ -158,6 +165,18 @@ main h2 {
 main p {
     font-size: 1.1em;
     line-height: 1.6em;
+}
+
+/* Contact links */
+#contact li a,
+#contact a {
+    color: #66b3ff;
+    transition: color 0.3s ease;
+}
+
+#contact li a:hover,
+#contact a:hover {
+    color: #0099cc;
 }
 
 /* Releases */
@@ -219,23 +238,23 @@ section.active {
     }
 
     body::before {
-        width: 850px;   /* smaller than 1200px */
-        height: 850px;  /* smaller than 1200px */
+        width: 850px;
+        height: 850px;
+    }
+
+    #content-wrapper {
+        max-width: 100%;
     }
 
     header h1 { font-size: 2.2em; }
     header p { font-size: 0.9rem; }
 
-    nav {
-        margin-top: 0;
-    }
-
+    nav { margin-top: 0; }
     nav ul { gap: 10px; }
     nav li { margin: 5px 0; }
 
     #normal-pages { padding: 30px 15px; }
     article { padding: 15px; border-left-width: 3px; }
-
     footer { margin-top: auto; }
 }
 
@@ -245,13 +264,13 @@ section.active {
     nav a { font-size: 1em; }
 
     body::before {
-        width: 800px;   /* even smaller on very small screens */
+        width: 800px;
         height: 800px;
     }
 
-    nav {
-        margin-top: -15px;
-    }
+    nav { margin-top: -15px; }
+
+    #content-wrapper { max-width: 100%; }
 
     main h2 { font-size: 1.5em; }
     main p { font-size: 1em; }
