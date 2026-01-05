@@ -1,18 +1,22 @@
-// Create a global overlay element
+// ====== Overlay Setup ======
+const main = document.querySelector('main');
+
+// Create overlay inside main
 let pageOverlay = document.createElement('div');
 pageOverlay.id = 'page-overlay';
-pageOverlay.style.position = 'fixed';
+pageOverlay.style.position = 'absolute';      // relative to main
 pageOverlay.style.top = '0';
 pageOverlay.style.left = '0';
 pageOverlay.style.width = '100%';
-pageOverlay.style.height = '100%';
+pageOverlay.style.height = '100%';            // full height of main
 pageOverlay.style.backgroundColor = 'rgba(0,0,0,0)'; // start transparent
-pageOverlay.style.pointerEvents = 'none'; // don't block clicks
+pageOverlay.style.pointerEvents = 'none';     // don't block clicks
 pageOverlay.style.transition = 'background-color 0.5s ease';
-pageOverlay.style.zIndex = '0';
-document.body.appendChild(pageOverlay);
+pageOverlay.style.zIndex = '0';               // below sections, above background
+main.appendChild(pageOverlay);
 
-// Fade functions
+
+// ====== Fade Functions ======
 function fadeOut(element) {
     return new Promise(resolve => {
         element.style.opacity = 0;
@@ -32,13 +36,14 @@ function fadeIn(element) {
     }, 20); // tiny delay to allow CSS to register
 }
 
-// Show normal page
+
+// ====== Show Normal Page ======
 async function showPage(pageId) {
     const current = document.querySelector('#normal-pages section.active');
     const next = document.getElementById(pageId);
     const landing = document.getElementById('landing');
 
-    // Hide landing if it's active
+    // Hide landing if active
     if (landing.classList.contains('active')) {
         landing.style.opacity = 0;
         landing.classList.remove('active');
@@ -49,13 +54,15 @@ async function showPage(pageId) {
     if (current) {
         await fadeOut(current);
     }
+
     fadeIn(next);
 
-    // Darken the page overlay slightly
-    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0.35)';
+    // Darken only main content
+    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
 }
 
-// Show landing page
+
+// ====== Show Landing Page ======
 async function showLanding() {
     const current = document.querySelector('#normal-pages section.active');
     const landing = document.getElementById('landing');
@@ -68,6 +75,6 @@ async function showLanding() {
     landing.style.opacity = 0;
     fadeIn(landing);
 
-    // Remove dark overlay when back to landing
+    // Remove overlay when back on landing
     pageOverlay.style.backgroundColor = 'rgba(0,0,0,0)';
 }
