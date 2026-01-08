@@ -14,13 +14,6 @@ body {
     align-items: stretch;
 }
 
-header,
-nav,
-footer {
-  width: 90%;
-  margin: 0 auto;
-}
-
 /* === Shared dark overlay value === */
 :root {
     --header-overlay: rgba(0, 0, 0, 0.5);
