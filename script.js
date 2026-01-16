@@ -1,64 +1,58 @@
 // ====== Overlay Setup ======
-const main = document.querySelector('main');
+const overlay = document.createElement('div');
+overlay.id = 'page-overlay';
+document.body.appendChild(overlay);
 
-// Create overlay inside main
-let pageOverlay = document.createElement('div');
-pageOverlay.id = 'page-overlay';
-pageOverlay.style.position = 'absolute';      // relative to main
-pageOverlay.style.top = '0';
-pageOverlay.style.left = '0';
-pageOverlay.style.width = '100%';
-pageOverlay.style.height = '100%';            // full height of main
-pageOverlay.style.backgroundColor = 'rgba(0,0,0,0)'; // start transparent
-pageOverlay.style.pointerEvents = 'none';     // don't block clicks
-pageOverlay.style.transition = 'background-color 0.5s ease';
-pageOverlay.style.zIndex = '0';               // below sections, above background
-main.appendChild(pageOverlay);
-
+const navLinks = document.querySelectorAll('nav a');
+const logo = document.querySelector('header h1');
 
 // ====== Fade Functions ======
-function fadeOut(element) {
+function fadeInOverlay() {
+    overlay.classList.add('active');
+}
+
+function fadeOutOverlay() {
+    overlay.classList.remove('active');
+}
+
+function fadeOutElement(element) {
     return new Promise(resolve => {
         element.style.opacity = 0;
         setTimeout(() => {
             element.classList.remove('active');
-            element.style.pointerEvents = 'none';
             resolve();
-        }, 500); // match CSS transition
+        }, 500);
     });
 }
 
-function fadeIn(element) {
+function fadeInElement(element) {
     element.classList.add('active');
-    element.style.pointerEvents = 'auto';
     setTimeout(() => {
         element.style.opacity = 1;
-    }, 20); // tiny delay to allow CSS to register
+    }, 20);
 }
 
-
-// ====== Show Normal Page ======
+// ====== Show Normal Page ======// ====== Show Normal Page (Faster Overlay) ======
 async function showPage(pageId) {
     const current = document.querySelector('#normal-pages section.active');
     const next = document.getElementById(pageId);
     const landing = document.getElementById('landing');
 
+    // Fade-in overlay immediately
+    fadeInOverlay();
+
     // Hide landing if active
     if (landing.classList.contains('active')) {
-        landing.style.opacity = 0;
-        landing.classList.remove('active');
+        await fadeOutElement(landing);
     }
 
     document.getElementById('normal-pages').style.display = 'block';
 
     if (current) {
-        await fadeOut(current);
+        await fadeOutElement(current);
     }
 
-    fadeIn(next);
-
-    // Darken only main content
-    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    fadeInElement(next);
 }
 
 
@@ -68,13 +62,22 @@ async function showLanding() {
     const landing = document.getElementById('landing');
 
     if (current) {
-        await fadeOut(current);
+        await fadeOutElement(current);
         document.getElementById('normal-pages').style.display = 'none';
     }
 
-    landing.style.opacity = 0;
-    fadeIn(landing);
+    fadeInElement(landing);
 
-    // Remove overlay when back on landing
-    pageOverlay.style.backgroundColor = 'rgba(0,0,0,0)';
+    // Fade-out overlay
+    fadeOutOverlay();
 }
+
+// ====== Event Listeners ======
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const target = link.getAttribute('data-target');
+        if (target) showPage(target);
+    });
+});
+
+logo.addEventListener('click', showLanding);
